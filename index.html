@@ -9,15 +9,18 @@
     <title>Todo</title>
 </head>
 <body onload="renderTodos()">
-    <main>
-        <div>
-            <form name="todoForm" onsubmit="addTodo(event)">
-                <input type="text" name="todo">
-                <input type="submit" value="Add">
-            </form>
-        </div>
-    </main>
-    <ul id="section" onclick="clickEventHandler(event)">
-    </ul>
+    <div class="hero">
+        <h1>TODO LIST</h1>
+        <main>
+            <div>
+                <form name="todoForm" onsubmit="addTodo(event)">
+                    <input type="text" name="todo">
+                    <input type="submit" value="Add">
+                </form>
+            </div>
+        </main>
+        <ul id="section" onclick="clickEventHandler(event)">
+        </ul>
+    </div>
 </body>
 </html>

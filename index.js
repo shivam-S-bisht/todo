@@ -4,7 +4,9 @@ function renderTodos (prevTodos=[]) {
     todos.map (val=> {
         const todo = createTodoComponent(val.value)
         if (val.status) {
-            todo.style.textDecoration = "line-through"
+            todo.childNodes[0].style.textDecoration = "line-through"
+            todo.style.backgroundColor = "#008f57"
+
         }
         document.getElementById("section").appendChild(todo)
     })
@@ -19,6 +21,8 @@ function createTodoComponent (value) {
     const text = document.createTextNode(value);
     p.appendChild(text);
 
+    const div = document.createElement("div")
+    div.setAttribute("class", "button-continer");
     const button1 = document.createElement("button")
     button1.innerHTML = "Complete"
     const button2 = document.createElement("button")
@@ -27,9 +31,11 @@ function createTodoComponent (value) {
     button1.name = "complete"
     button2.name = "remove"
 
+    div.appendChild(button1)
+    div.appendChild(button2)
+
     li.appendChild(p);
-    li.appendChild(button1);
-    li.appendChild(button2);
+    li.appendChild(div);
 
     return li;
 }
@@ -67,15 +73,17 @@ function addTodo (e) {
 }
 
 function clickEventHandler (e) {
-    const childIndex = Array.from(e.target.parentNode.parentNode.children).indexOf(e.target.parentNode)
+    const childIndex = Array.from(e.target.parentNode.parentNode.parentNode.children).indexOf(e.target.parentNode.parentNode)
     switch (e.target.name) {
         case "complete":
             handleComplete(childIndex)
-            e.target.parentNode.style.textDecoration = "line-through"
+            e.target.parentNode.parentNode.childNodes[0].style.textDecoration = "line-through"
+            e.target.parentNode.parentNode.style.backgroundColor = "#008f57"
             break 
         case "remove":
             handleRemove(childIndex)
-            e.target.parentNode.parentNode.removeChild(e.target.parentNode)
+            e.target.parentNode.parentNode.parentNode.removeChild(e.target.parentNode.parentNode)
+            // console.log(e.target.parentNode.parentNode.parentNode)
             break
     }
 }
